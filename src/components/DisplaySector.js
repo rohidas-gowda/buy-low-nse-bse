@@ -1,8 +1,11 @@
 import React from 'react'
 
-function DisplaySector() {
+function DisplaySector(props) {
+  
   return (
-    <div>DisplaySector</div>
+    <div className='bg-gray-400'>
+      <h1>{props.message}</h1>
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
+import DisplaySector from "../components/DisplaySector";
 
 function AbrasivesPage() {
   const [abrasives, setAbrasives] = useState([]);
@@ -17,6 +18,14 @@ function AbrasivesPage() {
 
   const result = Object.keys(abrasives).map((key) => abrasives[key]);
 
+  var abrasives_stock = [];
+
+  for(var i=0; i<result.length; i++){
+    if(result[i].sector === 'abrasives'){
+      abrasives_stock.push(result[i]);
+    }
+  }
+
   var stockInfo = (
     <table className="table-fixed border-collapse border border-gray-400">
       <thead>
@@ -27,17 +36,18 @@ function AbrasivesPage() {
         </tr>
       </thead>
       <tbody>
-        {result.map((stockDetails, index) => {
+        {
+        abrasives_stock.map((stockDetails, index) => {
           return (
             <tr key={index}>
               <td className="text-center border border-gray-300">
                 {stockDetails.stock_name}
               </td>
               <td className="text-center border border-gray-300">
-                {stockDetails.stock_price.toFixed(2)}
+                {stockDetails.stock_price}
               </td>
               <td className="text-center border border-gray-300">
-                {stockDetails.buying_price.toFixed(2)}
+                {stockDetails.buying_price}
               </td>
             </tr>
           );
@@ -49,6 +59,7 @@ function AbrasivesPage() {
   return (
     <div>
       <Header />
+      <DisplaySector message="Abrasives"/>
       <div>
         <div>{stockInfo}</div>
       </div>
